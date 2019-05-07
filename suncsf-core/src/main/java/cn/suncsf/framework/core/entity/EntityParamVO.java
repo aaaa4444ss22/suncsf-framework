@@ -37,6 +37,7 @@ public class EntityParamVO extends  EntityBase {
      */
     private  boolean assertion;
 
+    private  int rows;
 
     public String getFeild() {
         return feild;
@@ -84,5 +85,13 @@ public class EntityParamVO extends  EntityBase {
 
     public void setAssertion(boolean assertion) {
         this.assertion = assertion;
+    }
+
+    public int getRows() {
+        return rows;
+    }
+
+    public void setRows(int rows) {
+        this.rows = rows;
     }
 }
