@@ -1,13 +1,20 @@
 <component name="ArtifactManager">
-  <artifact type="jar" build-on-make="true" name="suncsf-core:jar">
+  <artifact type="jar" name="suncsf-core:jar">
     <output-path>$PROJECT_DIR$/out/artifacts/suncsf_core_jar</output-path>
     <root id="archive" name="suncsf-core.jar">
       <element id="module-output" name="suncsf-core" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../mvn/aliyun/org/slf4j/slf4j-api/1.7.26/slf4j-api-1.7.26.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../mvn/aliyun/com/squareup/okhttp3/okhttp/3.14.1/okhttp-3.14.1.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$PROJECT_DIR$/../../mvn/aliyun/junit/junit/4.8.1/junit-4.8.1.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../mvn/aliyun/org/apache/logging/log4j/log4j-core/2.11.2/log4j-core-2.11.2.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../mvn/aliyun/org/apache/logging/log4j/log4j-api/2.11.2/log4j-api-2.11.2.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../mvn/aliyun/com/fasterxml/jackson/core/jackson-core/2.9.8/jackson-core-2.9.8.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../mvn/aliyun/com/squareup/okio/okio/1.17.2/okio-1.17.2.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$PROJECT_DIR$/../../mvn/aliyun/com/fasterxml/jackson/core/jackson-databind/2.9.8/jackson-databind-2.9.8.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../mvn/aliyun/com/rabbitmq/amqp-client/5.6.0/amqp-client-5.6.0.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$PROJECT_DIR$/../../mvn/aliyun/com/fasterxml/jackson/core/jackson-annotations/2.9.0/jackson-annotations-2.9.0.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$PROJECT_DIR$/../../mvn/aliyun/org/apache/commons/commons-lang3/3.1/commons-lang3-3.1.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$PROJECT_DIR$/../../mvn/aliyun/com/fasterxml/jackson/core/jackson-core/2.9.8/jackson-core-2.9.8.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../mvn/aliyun/org/slf4j/slf4j-jdk14/1.7.26/slf4j-jdk14-1.7.26.jar" path-in-jar="/" />
     </root>
   </artifact>
 </component>
