@@ -1,34 +1,34 @@
 package cn.suncsf.framework.core.business;
 
+import cn.suncsf.framework.core.entity.EntityResult;
+
 import java.util.List;
 import java.util.Map;
 
-public interface IBaseDao<T,K> {
+/**
+ * 基础DAO层
+ */
+public interface IBaseBusiness<T,K> {
+
     /**
      * 插入数据
      * @param t 实体
      * @return 成功数
      */
-    public int save(T t) throws Exception;
+    public EntityResult save(T t) throws Exception;
 
     /**
      * 更新数据
      * @param t 实体
      * @return 成功数
      */
-    public int update(T t) throws Exception;
+    public EntityResult update(T t) throws Exception;
 
     /**
      * 删除数据
      * @param k 主键或关键字
      * @return 成功数
      */
-    public int delete(K k) throws Exception;
+    public EntityResult delete(K k) throws Exception;
 
-    /**
-     * 条件查询
-     * @param map
-     * @return
-     */
-    public List<T> where(Map<String,Object> map) throws Exception;
 }

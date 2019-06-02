@@ -14,4 +14,21 @@ public interface IEntity extends Serializable {
     public  default  String toJson(){
         return JsonUtil.toJson(this);
     }
+
+
+    /**
+     * 当前对象等于null
+     * @return
+     */
+    public  default boolean isNull(){
+        return  this == null;
+    }
+
+    /**
+     *  当前对象不等于null
+     * @return
+     */
+    public  default boolean isNotNull(){
+        return  this != null;
+    }
 }
