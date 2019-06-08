@@ -1,5 +1,6 @@
 package cn.suncsf.framework.core.entity;
 
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -65,5 +66,17 @@ public abstract class EntityDatabase extends EntityBase {
         Timestamp timestamp = Timestamp.from(LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant());
         logger.info("获取当前时间 -> {}",timestamp);
         return  timestamp;
+    }
+
+    /**
+     * 如果Strong 为 "" 则返回Null
+     * @param str
+     * @return
+     */
+    public String getStringNotBlank(String str){
+        if(StringUtils.isBlank(str)){
+            return null;
+        }
+        return str;
     }
 }

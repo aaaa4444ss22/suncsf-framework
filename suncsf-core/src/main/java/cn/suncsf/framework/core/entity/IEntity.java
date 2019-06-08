@@ -2,6 +2,7 @@ package cn.suncsf.framework.core.entity;
 
 
 import cn.suncsf.framework.core.utils.JsonUtil;
+import org.apache.commons.lang3.StringUtils;
 
 import java.io.Serializable;
 
@@ -16,19 +17,5 @@ public interface IEntity extends Serializable {
     }
 
 
-    /**
-     * 当前对象等于null
-     * @return
-     */
-    public  default boolean isNull(){
-        return  this == null;
-    }
 
-    /**
-     *  当前对象不等于null
-     * @return
-     */
-    public  default boolean isNotNull(){
-        return  this != null;
-    }
 }
