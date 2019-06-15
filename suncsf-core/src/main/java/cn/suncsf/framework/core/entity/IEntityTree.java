@@ -36,6 +36,13 @@ public interface IEntityTree extends  IEntity{
      */
     public  void setTreeChildrens(List<IEntityTree> childrens);
 
+
+    /**
+     * 获取子集合
+     * @return
+     */
+    public List<IEntityTree> getTreeChildrens();
+
     /**
      * 设置状态
      * @param
@@ -48,6 +55,10 @@ public interface IEntityTree extends  IEntity{
      */
     public void remove(String k);
 
-
+    /**
+     * 获取排序
+     * @return
+     */
+    public int getSort();
 
 }

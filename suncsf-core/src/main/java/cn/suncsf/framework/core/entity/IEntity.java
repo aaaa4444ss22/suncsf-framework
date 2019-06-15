@@ -6,7 +6,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.io.Serializable;
 
-public interface IEntity extends Serializable {
+public interface IEntity extends Serializable ,Cloneable {
 
     /**
      * 序列化JSON数据

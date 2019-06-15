@@ -27,4 +27,9 @@ public abstract class EntityBase  implements  IEntity{
     public void setObjectEntity(Object objectEntity) {
         this.objectEntity = objectEntity;
     }
+
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        return super.clone();
+    }
 }
