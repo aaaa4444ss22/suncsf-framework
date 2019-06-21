@@ -25,10 +25,4 @@ public interface IBaseDao<T,K> {
      */
     public int delete(K k) throws Exception;
 
-    /**
-     * 条件查询
-     * @param map
-     * @return
-     */
-    public List<T> where(Map<String,Object> map) throws Exception;
 }

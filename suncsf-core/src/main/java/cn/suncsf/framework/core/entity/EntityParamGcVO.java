@@ -1,11 +1,11 @@
 package cn.suncsf.framework.core.entity;
 
-import cn.suncsf.framework.core.entity.EntityParamVO;
+import java.lang.reflect.ParameterizedType;
 
 /**
  * 通用实现载体
  */
-public class EntityParamGcVO<T> extends EntityParamVO {
+public class EntityParamGcVO<T extends EntityBase> extends EntityParamVO {
 
     /**
      * 通用载体
@@ -18,5 +18,12 @@ public class EntityParamGcVO<T> extends EntityParamVO {
 
     public void setEntity(T entity) {
         this.entity = entity;
+        this.setObjectEntity(entity);
     }
+
+    @Override
+    public Object getObjectEntity() {
+        return this.entity;
+    }
+
 }

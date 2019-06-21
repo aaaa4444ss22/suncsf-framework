@@ -3,6 +3,10 @@ package cn.suncsf.framework.core.business;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * 通用查询功能
+ * @param <T> 泛型对象类型
+ */
 public interface IBaseBusinessQuery<T> {
 
     /**
@@ -13,9 +17,8 @@ public interface IBaseBusinessQuery<T> {
     public T findOne(Map<String,Object> map) throws Exception;
 
     /**
-     * 条件查询
-     * @param map
+     * 获取全部数据信息
      * @return
      */
-    public List<T> where(Map<String,Object> map) throws Exception;
+    public List<T> findAll();
 }
