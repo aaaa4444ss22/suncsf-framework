@@ -1,8 +1,10 @@
 package cn.suncsf.framework.core.entity;
 
 import java.util.List;
+import java.util.Map;
 
 public interface IEntityTree extends  IEntity{
+
 
     /**
      * 获取ID
@@ -44,10 +46,10 @@ public interface IEntityTree extends  IEntity{
     public List<IEntityTree> getTreeChildrens();
 
     /**
-     * 设置状态
-     * @param
+     * 设置状态集合
+     * @param stateList
      */
-    public  void setHaveChildren(Boolean is);
+    public  void setStateList(Map<EntityTreeEnum,Boolean> stateList);
 
     /**
      * 删除子元素
@@ -60,5 +62,6 @@ public interface IEntityTree extends  IEntity{
      * @return
      */
     public int getSort();
+
 
 }

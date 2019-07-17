@@ -18,12 +18,7 @@ public class EntityParamGcVO<T extends EntityBase> extends EntityParamVO {
 
     public void setEntity(T entity) {
         this.entity = entity;
-        this.setObjectEntity(entity);
     }
 
-    @Override
-    public Object getObjectEntity() {
-        return this.entity;
-    }
 
 }

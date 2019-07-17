@@ -24,7 +24,6 @@ public class JsonUtil {
      */
     public  static  String toJson(Object object){
         String jsonStr = null;
-
        try {
            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
            objectMapper.setDateFormat(dateFormat);
@@ -56,6 +55,6 @@ public class JsonUtil {
      * @return
      */
     public static ObjectMapper getObjectMapper() {
-        return objectMapper;
+        return objectMapper.copy();
     }
 }

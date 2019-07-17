@@ -2,6 +2,7 @@ package cn.suncsf.framework.core.utils;
 
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import okhttp3.*;
 import org.apache.commons.lang3.StringUtils;
@@ -28,6 +29,7 @@ public class OkHttpHelper {
 	        
 	        objectMapper = new ObjectMapper();
 	        objectMapper.setSerializationInclusion(Include.NON_NULL);
+			objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES,false);
 	    }
 
 	   public static OkHttpHelper getInstance() {
@@ -41,9 +43,9 @@ public class OkHttpHelper {
 	        return instance;
 	    }
 
-	    /**
-	     * һ���get���� ����һ�����������ϣ������url��Ȼ��ȡ�ķ��ص�String��
-	     */
+		/**
+		 * һ���get���� ����һ�����������ϣ������url��Ȼ��ȡ�ķ��ص�String��
+		 */
 	    public String get(String url) {
 	        return get(url, null);
 	    }
