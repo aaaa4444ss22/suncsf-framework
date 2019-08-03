@@ -1,5 +1,7 @@
 package cn.suncsf.framework.core.entity;
 
+import cn.suncsf.framework.core.utils.DateUtil;
+import cn.suncsf.framework.core.utils.StringUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -91,8 +93,7 @@ public abstract class EntityDatabase extends EntityBase {
      * @return
      */
     public synchronized  static  Date getNowDate(){
-        Date date = Date.from(LocalDate.now().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant());
-        return  date;
+        return DateUtil.getNowDate();
     }
 
     /**
@@ -100,9 +101,7 @@ public abstract class EntityDatabase extends EntityBase {
      * @return
      */
     public synchronized  static  Timestamp getNowTimestamp(){
-        Timestamp timestamp = Timestamp.from(LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant());
-        logger.info("获取当前时间 -> {}",timestamp);
-        return  timestamp;
+        return DateUtil.getNowTimestamp();
     }
 
     /**
@@ -111,9 +110,6 @@ public abstract class EntityDatabase extends EntityBase {
      * @return
      */
     public String getStringNotBlank(String str){
-        if(StringUtils.isBlank(str)){
-            return null;
-        }
-        return str;
+        return StringUtil.getStringIsNullToBlank(str);
     }
 }

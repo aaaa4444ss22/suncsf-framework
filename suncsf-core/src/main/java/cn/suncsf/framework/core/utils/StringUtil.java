@@ -2,6 +2,7 @@ package cn.suncsf.framework.core.utils;
 
 
 import org.apache.commons.codec.digest.DigestUtils;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * @author sunchao
@@ -10,7 +11,7 @@ import org.apache.commons.codec.digest.DigestUtils;
  * @create 2019/6/26 11:54
  * @description 字符串操作
  */
-public class StringUtils {
+public class StringUtil {
 
     /**
      * 拆解MD5密码
@@ -43,5 +44,17 @@ public class StringUtils {
             str = ps.toLowerCase();
         }
         return  str;
+    }
+
+    /**
+     * 如果Strong 为 "" 则返回Null
+     * @param str
+     * @return
+     */
+    public static String getStringIsNullToBlank(String str){
+        if(StringUtils.isBlank(str)){
+            return null;
+        }
+        return str;
     }
 }
