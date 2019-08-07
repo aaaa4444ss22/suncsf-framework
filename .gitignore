@@ -25,3 +25,4 @@ hs_err_pid*
 .idea/
 .idea/workspace.xml
 suncsf-core/target/
+suncsf-core/src/test

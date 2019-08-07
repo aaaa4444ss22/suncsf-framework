@@ -12,4 +12,14 @@ public class KeyValueStr extends EntityKeyValue<String,String> {
         this.setsKey(s);
         this.setsValue(s2);
     }
+
+    @Override
+    public void setsKey(String sKey) {
+        super.setsKey(sKey);
+    }
+
+    @Override
+    public void setsValue(String sValue) {
+        super.setsValue(sValue);
+    }
 }

@@ -24,7 +24,7 @@ public class OkHttpHelper {
     private static OkHttpHelper instance;
     private OkHttpClient okHttpClient;
     private ObjectMapper objectMapper;
-
+    private Map<String,String> headers;
     public OkHttpHelper() {
 		this(null);
     }
@@ -36,6 +36,9 @@ public class OkHttpHelper {
 		if(keyPass != null){
 			okHttpClient = builder.addInterceptor(new BasicAuthInterceptor(keyPass.getsKey(),keyPass.getsValue()))
 					.build();
+			if(keyPass.getObjectEntity() != null){
+				headers = (Map<String,String>)keyPass.getObjectEntity();
+			}
 		}else {
 			okHttpClient = builder.build();
 		}
@@ -83,7 +86,17 @@ public class OkHttpHelper {
             }
             sb.deleteCharAt(sb.length() - 1);
         }
-        Request request = new Request.Builder().url(url + sb.toString()).get().build();
+        Request.Builder builder = new Request.Builder();
+        if(headers !=null){
+			for (Map.Entry<String, String> item : headers.entrySet()) {
+				builder = builder.addHeader(item.getKey(),item.getValue());
+			}
+		}
+		Request request = builder
+				.addHeader("Content-Type","application/json")
+				.url(url + sb.toString())
+				.get()
+				.build();
         Call call = okHttpClient.newCall(request);
         try {
             return call.execute().body().string();
@@ -113,7 +126,13 @@ public class OkHttpHelper {
                 formBodyBuilder.add(entry.getKey(), value);
             }
         }
-        Request request = new Request.Builder().url(url).post(formBodyBuilder.build()).build();
+        Request.Builder builder = new Request.Builder();
+		if(headers !=null){
+			for (Map.Entry<String, String> item : headers.entrySet()) {
+				builder = builder.addHeader(item.getKey(),item.getValue());
+			}
+		}
+        Request request = builder.url(url).post(formBodyBuilder.build()).build();
         Call call = okHttpClient.newCall(request);
         try {
             return call.execute().body().string();
@@ -137,8 +156,13 @@ public class OkHttpHelper {
             try {
                 RequestBody requestBody = FormBody.create(MediaType.parse("application/json; charset=utf-8")
                         , objectMapper.writeValueAsBytes(t));
-
-                Request request = new Request.Builder()
+				Request.Builder builder = new Request.Builder();
+				if(headers !=null){
+					for (Map.Entry<String, String> item : headers.entrySet()) {
+						builder = builder.addHeader(item.getKey(),item.getValue());
+					}
+				}
+                Request request = builder
                         .url(url)
                         .post(requestBody)
                         .build();
