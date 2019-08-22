@@ -2,6 +2,9 @@ package cn.suncsf.framework.core.entity;
 
 import cn.suncsf.framework.core.utils.JsonUtil;
 
+/**
+ * 基类
+ */
 public abstract class EntityBase  implements  IEntity{
 
     /**

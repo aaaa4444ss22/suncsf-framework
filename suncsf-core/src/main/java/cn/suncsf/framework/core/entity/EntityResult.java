@@ -1,5 +1,9 @@
 package cn.suncsf.framework.core.entity;
 
+
+/**
+ * 返回载体
+ */
 public abstract class EntityResult extends  EntityBase {
 
     /**

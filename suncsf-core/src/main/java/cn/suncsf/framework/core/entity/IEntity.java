@@ -6,6 +6,9 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.io.Serializable;
 
+/**
+ * 基础类接口
+ */
 public interface IEntity extends Serializable ,Cloneable {
 
     /**

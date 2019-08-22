@@ -16,7 +16,7 @@ public abstract class AbaseBusiness {
      * @return
      */
     public EntityResult getResult(int count, String message){
-        logger.info("getResult(int,String)；成功数：{}，提示消息：{}",count,message);
+        logger.debug("getResult(int,String);成功数：{}，提示消息：{}",count,message);
         return  new ResultObject().createResult(count,message);
     }
     /**
@@ -25,7 +25,20 @@ public abstract class AbaseBusiness {
      * @return
      */
     public EntityResult getResult(int count){
-        logger.info("getResult(int)；成功数：{}，提示消息：null",count);
+        logger.debug("getResult(int);成功数：{}，提示消息：null",count);
         return  getResult(count,null);
+    }
+
+    /**
+     * 返回并初始化
+     * @param result
+     * @return
+     */
+    public EntityResult getResult(EntityResult result){
+        logger.debug("getResult(EntityResult);EntityResult：{}",result);
+        if(result == null){
+            return getResult(0);
+        }
+        return result;
     }
 }

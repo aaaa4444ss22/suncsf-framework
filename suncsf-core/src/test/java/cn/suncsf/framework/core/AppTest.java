@@ -5,7 +5,9 @@ import static org.junit.Assert.assertTrue;
 import cn.suncsf.framework.core.common.KeyValueStr;
 import cn.suncsf.framework.core.entity.EntityBase;
 import cn.suncsf.framework.core.entity.EntityKeyValue;
+import cn.suncsf.framework.core.utils.JsonUtil;
 import cn.suncsf.framework.core.utils.PropertiesUtil;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
@@ -39,43 +41,18 @@ public class AppTest {
         final String key = "list.states";
         final Class<?> cls = List.class;
         final Class<?> ccls = KeyValueStr.class;
-        Map<String, Map<String, String>> list = (Map<String, Map<String, String>>) getList(properties, key, cls, ccls);
-        List<Object> lista = new ArrayList<>();
-        for (Map.Entry<String, Map<String, String>> item : list.entrySet()) {
-            try {
-                Object o = ccls.newInstance();
-                BeanWrapper beanWrapper = new BeanWrapperImpl(o);
-                        Method[] methods = o.getClass().getMethods();
-                Map<String, String> map = item.getValue();
-                for (Method method : methods) {
-//                    System.out.println(method.getName());
-                    for (Map.Entry<String, String> kv : map.entrySet()) {
-                        if (method.getName().replace("set", "").equalsIgnoreCase(kv.getKey())) {
-                            try {
-                                System.out.println(method.getName());
-                                Method field = o.getClass().getDeclaredMethod(method.getName(), Object.class);
-                                field.setAccessible(true);
-                                field.invoke(o, kv.getValue());
+        Map<String, Map<String, String>> list = PropertiesUtil.getListPropertyValue(properties, key);
+//        List<Object> lista = new ArrayList<>();
+        List<KeyValueStr> list1 = PropertiesUtil.builder(list,KeyValueStr.class);
 
-                            } catch (NoSuchMethodException e) {
-                                e.printStackTrace();
-                            } catch (InvocationTargetException e) {
-                                e.printStackTrace();
-                            }
-                        }
-
-                    }
-
-                }
-                lista.add(o);
-            } catch (InstantiationException e) {
-                e.printStackTrace();
-            } catch (IllegalAccessException e) {
-                e.printStackTrace();
-            }
+        try {
+            System.out.println(JsonUtil.getObjectMapper().writeValueAsString(list1));
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
         }
 
-        System.out.println(lista.size());
+        String v = PropertiesUtil.getPropertyValue(properties,"list.statesa[0].sKey");
+        System.out.println(v);
     }
 
 

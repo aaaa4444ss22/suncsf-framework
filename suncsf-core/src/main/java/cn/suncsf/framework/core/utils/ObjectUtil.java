@@ -1,7 +1,12 @@
 package cn.suncsf.framework.core.utils;
 
 import java.io.*;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Properties;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class ObjectUtil {
     public static <T> List<T> deepCopy(List<T> src) throws IOException, ClassNotFoundException {
@@ -15,4 +20,6 @@ public class ObjectUtil {
         List<T> dest = (List<T>) in.readObject();
         return dest;
     }
+
+
 }
