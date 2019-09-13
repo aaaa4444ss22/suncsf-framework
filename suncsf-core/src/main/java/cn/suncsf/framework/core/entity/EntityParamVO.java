@@ -10,7 +10,7 @@ public class EntityParamVO extends  EntityBase {
     /**
      * 通用字段
      */
-    private  String feild;
+    private  String field;
 
     /**
      * 时间载体
@@ -39,12 +39,12 @@ public class EntityParamVO extends  EntityBase {
 
     private  int rows;
 
-    public String getFeild() {
-        return feild;
+    public String getField() {
+        return field;
     }
 
-    public void setFeild(String feild) {
-        this.feild = feild;
+    public void setField(String field) {
+        this.field = field;
     }
 
     public Timestamp getTimestamp() {
