@@ -8,7 +8,9 @@ import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.time.temporal.WeekFields;
 import java.util.Date;
+import java.util.Locale;
 
 /**
  * @author sunchao
@@ -53,4 +55,19 @@ public class DateUtil {
         return  timestamp;
     }
 
+
+    /**
+     * 获取周开始
+     * @return
+     */
+    public static LocalDate getWeekFirstDay(){
+        return LocalDate.now().with(WeekFields.of(Locale.FRANCE).dayOfWeek(),1);
+    }
+    /**
+     * 获取周结束
+     * @return
+     */
+    public static LocalDate getWeekEndDay(){
+        return LocalDate.now().with(WeekFields.of(Locale.FRANCE).dayOfWeek(),7);
+    }
 }

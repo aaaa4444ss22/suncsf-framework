@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.oracle.jrockit.jfr.UseConstantPool;
 import com.sun.net.httpserver.BasicAuthenticator;
 import okhttp3.*;
 import org.apache.commons.lang3.StringUtils;
@@ -20,6 +21,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * OkHttp工具类
  */
+@Deprecated
 public class OkHttpHelper {
     private static OkHttpHelper instance;
     private OkHttpClient okHttpClient;
@@ -45,7 +47,7 @@ public class OkHttpHelper {
 		objectMapper = new ObjectMapper();
 		objectMapper.setSerializationInclusion(Include.NON_NULL);
 		objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-	}
+    }
 
 
     public static OkHttpHelper getInstance() {

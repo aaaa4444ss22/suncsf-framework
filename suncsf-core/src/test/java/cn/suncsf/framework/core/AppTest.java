@@ -5,7 +5,9 @@ import static org.junit.Assert.assertTrue;
 import cn.suncsf.framework.core.common.KeyValueStr;
 import cn.suncsf.framework.core.entity.EntityBase;
 import cn.suncsf.framework.core.entity.EntityKeyValue;
+import cn.suncsf.framework.core.utils.DateUtil;
 import cn.suncsf.framework.core.utils.JsonUtil;
+import cn.suncsf.framework.core.utils.OkHttpUtil;
 import cn.suncsf.framework.core.utils.PropertiesUtil;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.junit.Test;
@@ -18,6 +20,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Type;
+import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -94,5 +97,19 @@ public class AppTest {
         return null;
     }
 
+    @Test
+    public void t1(){
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        Date d = DateUtil.localDateToDate(DateUtil.getWeekEndDay());
+        System.out.println(format.format(d));
+    }
 
+    @Test
+    public void t2(){
+        String body = new OkHttpUtil
+                .Builder()
+                .build()
+                .post("http://www.baidu.com");
+        System.out.println(body);
+    }
 }

@@ -7,6 +7,7 @@ import org.springframework.beans.BeanWrapperImpl;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.reflect.Array;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -102,21 +103,51 @@ public class PropertiesUtil {
      */
     public static <T> List<T> builder(Map<String, Map<String, String>> map,Class<T> cls){
 
-        List<T> list = new ArrayList<>();
+//        List<T> list = new ArrayList<>();
+//        for (Map.Entry<String, Map<String, String>> item : map.entrySet()) {
+//            try {
+//                T t = cls.newInstance();
+//                BeanWrapper beanWrapper = new BeanWrapperImpl(t);
+//                Map<String, String> values = item.getValue();
+//                beanWrapper.setPropertyValues(values);
+//                list.add(t);
+//            } catch (InstantiationException e) {
+//                e.printStackTrace();
+//            } catch (IllegalAccessException e) {
+//                e.printStackTrace();
+//            }
+//        }
+//        return list;
+        T[] list = builderArray(map,cls);
+        return Arrays.asList(list);
+    }
+    /**
+     *
+     * @param map Map<个数分组值,Map<属性名称,属性值>>
+     * @param cls 接收类型
+     * @param <T> 类型
+     * @return 返回填充好的数据值
+     */
+    public static <T> T[] builderArray(Map<String, Map<String, String>> map,Class<T> cls){
+
+        T[] array = (T[] )Array.newInstance(cls,map.entrySet().size());
+
+        int i = 0;
         for (Map.Entry<String, Map<String, String>> item : map.entrySet()) {
             try {
                 T t = cls.newInstance();
                 BeanWrapper beanWrapper = new BeanWrapperImpl(t);
                 Map<String, String> values = item.getValue();
                 beanWrapper.setPropertyValues(values);
-                list.add(t);
+                array[i] = t;
+                i++;
             } catch (InstantiationException e) {
                 e.printStackTrace();
             } catch (IllegalAccessException e) {
                 e.printStackTrace();
             }
         }
-        return list;
+        return array;
 
     }
 }
