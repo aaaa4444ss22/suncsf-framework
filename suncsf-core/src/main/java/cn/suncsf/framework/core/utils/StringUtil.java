@@ -24,9 +24,9 @@ public class StringUtil {
     public static String md5Formatter(String m,boolean isline,boolean isbig,final int size){
 
         String str = null;
-        if(m.length()/size > 0){
-            return str;
-        }
+//        if(m.length()/size > 0){
+//            return str;
+//        }
         String ps = DigestUtils.md5Hex(m);
         if(isline){
             StringBuilder builder = new StringBuilder(ps.length()+(ps.length()/2-1));
