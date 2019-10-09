@@ -26,3 +26,8 @@ hs_err_pid*
 .idea/workspace.xml
 suncsf-core/target/
 suncsf-core/src/test
+.project
+suncsf-core/.settings/org.eclipse.jdt.core.prefs
+*.prefs
+suncsf-core/.classpath
+suncsf-core/MANIFEST.MF

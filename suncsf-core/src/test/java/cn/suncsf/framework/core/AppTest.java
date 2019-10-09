@@ -108,6 +108,8 @@ public class AppTest {
     public void t2(){
         String body = new OkHttpUtil
                 .Builder()
+                .setHeads(new HashMap<>())
+                .setBasicAccount(new KeyValueStr())
                 .build()
                 .post("http://www.baidu.com");
         System.out.println(body);
