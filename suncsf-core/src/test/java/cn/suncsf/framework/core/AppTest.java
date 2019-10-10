@@ -5,6 +5,7 @@ import static org.junit.Assert.assertTrue;
 import cn.suncsf.framework.core.common.KeyValueStr;
 import cn.suncsf.framework.core.entity.EntityBase;
 import cn.suncsf.framework.core.entity.EntityKeyValue;
+import cn.suncsf.framework.core.entity.ResultObject;
 import cn.suncsf.framework.core.utils.DateUtil;
 import cn.suncsf.framework.core.utils.JsonUtil;
 import cn.suncsf.framework.core.utils.OkHttpUtil;
@@ -56,6 +57,7 @@ public class AppTest {
 
         String v = PropertiesUtil.getPropertyValue(properties,"list.statesa[0].sKey");
         System.out.println(v);
+
     }
 
 
@@ -65,7 +67,7 @@ public class AppTest {
     public static Object getList(Properties properties, final String k, final Class<?> type, final Class<?> cls) {
         if (type == List.class) {
             Map<String, Map<String, String>> list = new HashMap<>();
-
+            new ResultObject().createResult(0,"");
 
             for (Map.Entry<Object, Object> item : properties.entrySet()) {
                 final String kName = item.getKey().toString();

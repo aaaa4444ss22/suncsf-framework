@@ -23,6 +23,12 @@ public class EntityParamVO extends  EntityBase {
     private  int page;
 
     /**
+     * 页面索引
+     */
+    private  int pageIndex;
+
+
+    /**
      * 页面容量
      */
     private  int pageSize;
@@ -45,6 +51,14 @@ public class EntityParamVO extends  EntityBase {
 
     public void setField(String field) {
         this.field = field;
+    }
+
+    public int getPageIndex() {
+        return pageIndex;
+    }
+
+    public void setPageIndex(int pageIndex) {
+        this.pageIndex = pageIndex;
     }
 
     public Timestamp getTimestamp() {

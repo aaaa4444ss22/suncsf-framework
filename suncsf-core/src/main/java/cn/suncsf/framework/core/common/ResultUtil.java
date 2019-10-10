@@ -15,7 +15,6 @@ public class ResultUtil {
      * @return
      */
     public  static <T>  ResultEyPage<T> toResultEyPage(IPageList<T> pageList){
-
         ResultEyPage<T> resultEyPage = new ResultEyPage<T>();
         resultEyPage.setRows(pageList.getSource());
         resultEyPage.setTotal(pageList.getCount());

@@ -42,7 +42,17 @@ public class ResultObject extends  EntityResult {
     }
 
     @Override
+    public EntityResult createResult(int count, String message, Object objectEntity) {
+       return createResult(count > 0,message,objectEntity);
+    }
+
+    @Override
     public EntityResult createResult(boolean assertion,String message) {
+        return createResult(assertion, message,null);
+    }
+
+    @Override
+    public EntityResult createResult(boolean assertion, String message, Object objectEntity) {
         ResultStatus status = ResultStatus.Error;
         if(assertion){
             status = ResultStatus.Successfully;
@@ -50,6 +60,9 @@ public class ResultObject extends  EntityResult {
         EntityResult result = new ResultObject(status);
         if(StringUtils.isNotEmpty(message)){
             result.setMessage(message);
+        }
+        if(objectEntity != null){
+            result.setObjectEntity(objectEntity);
         }
         return  result;
     }

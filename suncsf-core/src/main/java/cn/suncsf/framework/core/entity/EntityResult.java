@@ -71,10 +71,27 @@ public abstract class EntityResult extends  EntityBase {
     public abstract EntityResult createResult(int count,String message);
 
     /**
+     * count 小于等于 0 ：false，count 大于 0 ：true
+     * @param count
+     * @param message
+     * @param objectEntity
+     * @return
+     */
+    public abstract EntityResult createResult(int count,String message,Object objectEntity);
+    /**
      *
      * @param assertion
      * @param message
      * @return
      */
     public  abstract  EntityResult createResult(boolean assertion,String message);
+
+    /**
+     *
+     * @param assertion
+     * @param message
+     * @param objectEntity
+     * @return
+     */
+    public  abstract  EntityResult createResult(boolean assertion,String message,Object objectEntity);
 }

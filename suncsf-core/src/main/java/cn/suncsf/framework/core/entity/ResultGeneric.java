@@ -54,6 +54,12 @@ public class ResultGeneric<T> extends  EntityResult {
         return createResult(count,message);
     }
 
+    @Deprecated
+    @Override
+    public EntityResult createResult(int count, String message, Object objectEntity) {
+        return null;
+    }
+
     @Override
     public EntityResult createResult(boolean assertion, String message) {
         ResultStatus status = ResultStatus.Error;
@@ -61,5 +67,11 @@ public class ResultGeneric<T> extends  EntityResult {
             status = ResultStatus.Successfully;
         }
         return new ResultGeneric(status,message);
+    }
+
+    @Deprecated
+    @Override
+    public EntityResult createResult(boolean assertion, String message, Object objectEntity) {
+        return null;
     }
 }
