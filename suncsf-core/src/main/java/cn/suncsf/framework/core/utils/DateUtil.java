@@ -9,8 +9,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.temporal.WeekFields;
-import java.util.Date;
-import java.util.Locale;
+import java.util.*;
 
 /**
  * @author sunchao
@@ -75,5 +74,32 @@ public class DateUtil {
      */
     public static LocalDate getWeekEndDay(){
         return LocalDate.now().with(WeekFields.of(Locale.FRANCE).dayOfWeek(),7);
+    }
+
+
+    /**
+     * 获取日期在年月周
+     * @return
+     */
+    public Map<DateTypeEnum,Integer> getWeekOfMonth(){
+        Calendar cal = Calendar.getInstance();
+
+        cal.setTime(DateUtil.getNowDate());
+        //外国月份为0-11所以月份加一
+        int year = cal.get(Calendar.YEAR);
+        int month = cal.get(Calendar.MONTH)+1;
+        int mweek = cal.get(Calendar.WEEK_OF_MONTH);
+        return new HashMap<DateTypeEnum,Integer>(){{
+            put(DateTypeEnum.Year,year);
+            put(DateTypeEnum.Month,month);
+            put(DateTypeEnum.Week,mweek);
+        }};
+    }
+
+    public enum DateTypeEnum{
+        Year,
+        Month,
+        Day,
+        Week
     }
 }
