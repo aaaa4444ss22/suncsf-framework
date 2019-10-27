@@ -34,6 +34,12 @@ public class DateUtil {
         return Date.from(instant);
     }
 
+    public static LocalDateTime dateToLocalDateTime(Date date){
+        long time = date.getTime();
+        Instant instant = Instant.ofEpochMilli(time);
+        ZoneId zone = ZoneId.systemDefault();
+        return LocalDateTime.ofInstant(instant,zone);
+    }
 
     /**
      * 获取当前日期

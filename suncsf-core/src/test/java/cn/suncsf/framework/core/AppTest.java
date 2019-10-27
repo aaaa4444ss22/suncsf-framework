@@ -11,6 +11,7 @@ import cn.suncsf.framework.core.utils.JsonUtil;
 import cn.suncsf.framework.core.utils.OkHttpUtil;
 import cn.suncsf.framework.core.utils.PropertiesUtil;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
@@ -22,6 +23,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Type;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -116,4 +118,11 @@ public class AppTest {
                 .post("http://www.baidu.com");
         System.out.println(body);
     }
+
+    @Test
+    public void t3(){
+        LocalDateTime dateTime = DateUtil.dateToLocalDateTime(new Date());
+        Assert.assertNotNull(dateTime);
+    }
+
 }
