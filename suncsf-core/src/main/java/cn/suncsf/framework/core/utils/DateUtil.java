@@ -81,10 +81,9 @@ public class DateUtil {
      * 获取日期在年月周
      * @return
      */
-    public Map<DateTypeEnum,Integer> getWeekOfMonth(){
+    public static Map<DateTypeEnum,Integer> getWeekOfMonth(Date date){
         Calendar cal = Calendar.getInstance();
-
-        cal.setTime(DateUtil.getNowDate());
+        cal.setTime(date);
         //外国月份为0-11所以月份加一
         int year = cal.get(Calendar.YEAR);
         int month = cal.get(Calendar.MONTH)+1;
