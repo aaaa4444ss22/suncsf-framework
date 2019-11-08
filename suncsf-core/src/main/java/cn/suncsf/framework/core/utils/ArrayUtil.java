@@ -43,11 +43,11 @@ public class ArrayUtil {
      * @param <T>
      * @return
      */
-    public static <T> T[] createArray(List<T> list,Class<T> cls){
+    public static <T,E extends T> T[] createArray(List<T> list,Class<E> cls){
         if(list == null || list.size() == 0){
-            return (T[]) Array.newInstance(cls,0);
+            return (E[]) Array.newInstance(cls,0);
         }
-        T[] array = (T[]) Array.newInstance(cls,list.size());
+        T[] array = (E[]) Array.newInstance(cls,list.size());
         for (int i = 0; i < list.size(); i++) {
             array[i] = list.get(i);
         }
