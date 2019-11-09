@@ -6,8 +6,6 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.oracle.jrockit.jfr.UseConstantPool;
-import com.sun.net.httpserver.BasicAuthenticator;
 import okhttp3.*;
 import org.apache.commons.lang3.StringUtils;
 
