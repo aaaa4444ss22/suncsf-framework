@@ -59,11 +59,27 @@ public class OkHttpUtil {
         } else {
             client = okClient.build();
         }
-
-
     }
 
     public String get(String url, Map<String, String> params) {
+        try {
+            Response response = getResponse(url,params);
+            if(response != null){
+                return response.body().toString();
+            }
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public String get(String url) {
+        return get(url, null);
+    }
+    public Response getResponse(String url)  throws IOException{
+        return getResponse(url, null);
+    }
+    public Response getResponse(String url, Map<String, String> params) throws IOException {
         StringBuilder sb = new StringBuilder();
         if (params != null && params.size() > 0) {
             Set<Map.Entry<String, String>> entrySet = params.entrySet();
@@ -92,18 +108,8 @@ public class OkHttpUtil {
                 .get()
                 .build();
         Call call = client.newCall(request);
-        try {
-            return call.execute().body().string();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return null;
+        return call.execute();
     }
-
-    public String get(String url) {
-        return get(url, null);
-    }
-
     /**
      * POST 传输JSON请求
      *
@@ -113,35 +119,10 @@ public class OkHttpUtil {
      * @return content结果
      */
     public <T> String post(String url, T t) {
-
         try {
-
-            Request.Builder builder = new Request.Builder();
-            if (heads != null) {
-                for (Map.Entry<String, String> item : heads.entrySet()) {
-                    builder = builder.addHeader(item.getKey(), item.getValue());
-                }
-            }
-            Request.Builder requestBuilder = builder
-                    .url(url);
-            Request request = null;
-            if (null != t) {
-                RequestBody requestBody = FormBody.create(MediaType.parse("application/json; charset=utf-8")
-                        , objectMapper.writeValueAsBytes(t));
-                request = requestBuilder.post(requestBody)
-                        .build();
-            } else {
-                request = requestBuilder.build();
-            }
-            Call call = client.newCall(request);
-            try {
-                return call.execute().body().string();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-        } catch (JsonProcessingException e) {
-            // TODO Auto-generated catch block
+            Response response = postResponse(url,t);
+            return response.body().toString();
+        } catch (IOException e) {
             e.printStackTrace();
         }
         return null;
@@ -151,7 +132,38 @@ public class OkHttpUtil {
     public String post(String url) {
         return post(url, null);
     }
-
+    public Response postResponse(String url) throws IOException{
+        return postResponse(url, null);
+    }
+    /**
+     * POST 传输JSON请求
+     *
+     * @param url 请求地址
+     * @param t   泛型对象
+     * @param <T> 类型
+     * @return content结果
+     */
+    public <T> Response postResponse(String url, T t) throws IOException {
+        Request.Builder builder = new Request.Builder();
+        if (heads != null) {
+            for (Map.Entry<String, String> item : heads.entrySet()) {
+                builder = builder.addHeader(item.getKey(), item.getValue());
+            }
+        }
+        Request.Builder requestBuilder = builder
+                .url(url);
+        Request request = null;
+        if (null != t) {
+            RequestBody requestBody = FormBody.create(MediaType.parse("application/json; charset=utf-8")
+                    , objectMapper.writeValueAsBytes(t));
+            request = requestBuilder.post(requestBody)
+                    .build();
+        } else {
+            request = requestBuilder.build();
+        }
+        Call call = client.newCall(request);
+        return call.execute();
+    }
 
     public static class Builder {
         //        private Method method;

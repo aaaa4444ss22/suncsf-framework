@@ -1,5 +1,6 @@
 package cn.suncsf.framework.core.utils;
 
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanWrapper;
@@ -7,6 +8,7 @@ import org.springframework.beans.BeanWrapperImpl;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.lang.reflect.Array;
 import java.util.*;
 import java.util.regex.Matcher;
@@ -29,17 +31,29 @@ public class PropertiesUtil {
      * @return
      */
     public static Properties load(String path, Class<?> cls){
+       return load(path,cls,null);
+    }
+
+    /**
+     * 加载文件
+     * @param path
+     * @param cls
+     * @return
+     */
+    public static Properties load(String path, Class<?> cls,String encoding){
         Properties properties = new Properties();
         try {
+            if(StringUtils.isBlank(encoding)){
+                encoding = "UTF-8";
+            }
             InputStream in = cls.getClassLoader()
                     .getResourceAsStream(path);
-            properties.load(in);
+            properties.load(new InputStreamReader(in,encoding));
         } catch (IOException e) {
             e.printStackTrace();
         }
         return properties;
     }
-
     /**
      *
      * @param properties properties 属性集合
