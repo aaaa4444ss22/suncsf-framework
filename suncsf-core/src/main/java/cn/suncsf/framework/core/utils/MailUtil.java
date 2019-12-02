@@ -1,19 +1,27 @@
 package cn.suncsf.framework.core.utils;
 
 import cn.suncsf.framework.core.business.AbaseBusiness;
+import cn.suncsf.framework.core.common.KeyValueStr;
 import cn.suncsf.framework.core.entity.EntityResult;
+import cn.suncsf.framework.core.exception.EMainException;
+import com.sun.mail.util.MailConnectException;
+import com.sun.mail.util.SocketConnectException;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
+import javax.activation.DataHandler;
+import javax.activation.FileDataSource;
 import javax.mail.Address;
 import javax.mail.Message;
 import javax.mail.Session;
 import javax.mail.Transport;
-import javax.mail.internet.AddressException;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
+import javax.mail.internet.*;
+import java.io.File;
 import java.util.*;
 import java.util.function.Function;
+
 import java.util.stream.Stream;
 
 /**
@@ -24,6 +32,7 @@ import java.util.stream.Stream;
  * @description
  */
 public class MailUtil extends AbaseBusiness {
+    private static Logger logger = LoggerFactory.getLogger(MailUtil.class);
     public final static String HTML_CONTENT_TYPE = "text/html;charset=UTF-8";
     private Builder builder;
 
@@ -51,6 +60,7 @@ public class MailUtil extends AbaseBusiness {
 
         Session session = Session.getInstance(properties);
         session.setDebug(true);
+
         MimeMessage message = new MimeMessage(session);
         message.setFrom(new InternetAddress(builder.fromAddress
                 ,StringUtils.isNotBlank(builder.name)?builder.name:(builder.fromAddress.split("@")[0])
@@ -59,9 +69,58 @@ public class MailUtil extends AbaseBusiness {
         message.setRecipients(Message.RecipientType.TO
                 , ArrayUtil.createArray(builder.toMoreAddress,InternetAddress.class));
 
-        message.setContent(builder.content
-                ,StringUtils.isNotBlank(builder.contentType)?builder.contentType:HTML_CONTENT_TYPE);
+        // 设置多个抄送地址
+        if(null != builder.cc && !builder.cc.isEmpty()){
+            InternetAddress[] internetAddressCC = new InternetAddress[builder.cc.size()];
+            for (int i = 0;i<builder.cc.size();i++) {
+                internetAddressCC[i] = new InternetAddress(builder.cc.get(i));
+            }
+            message.setRecipients(Message.RecipientType.CC, internetAddressCC);
+        }
+
+        // 设置多个密送地址
+        if(null != builder.bcc && !builder.bcc.isEmpty()){
+            InternetAddress[] internetAddressBCC = new InternetAddress[builder.bcc.size()];
+            for (int i = 0;i<builder.bcc.size();i++) {
+                internetAddressBCC[i] = new InternetAddress(builder.bcc.get(i));
+            }
+            message.setRecipients(Message.RecipientType.BCC, internetAddressBCC);
+        }
+
         message.setSubject(builder.subject);
+
+        /**
+         * 将附件部分放入主体部分
+         */
+        MimeMultipart multipart = new MimeMultipart();
+        if(builder.fileUrls != null && builder.fileUrls.keySet().size() > 0){
+            try {
+
+
+                for (Map.Entry<String,String> fileInfo: builder.fileUrls.entrySet()) {
+                    File file = new File(fileInfo.getKey());
+                    if(file.exists()){
+                        MimeBodyPart mbp = new MimeBodyPart();
+                        DataHandler dataHandler = new DataHandler(new FileDataSource(fileInfo.getKey()));
+                        mbp.setDataHandler(dataHandler);
+                        mbp.setFileName(fileInfo.getValue());
+                        multipart.addBodyPart(mbp);
+                    }
+                }
+                message.setContent(multipart);
+            }catch (Exception e){
+                logger.error(e.getMessage());
+                new EMainException("邮件附件解析错误");
+            }
+        }
+       if(StringUtils.isNotBlank(builder.content)){
+           MimeBodyPart mbp = new MimeBodyPart();
+           mbp.setContent(builder.content
+                   ,StringUtils.isNotBlank(builder.contentType)?builder.contentType:HTML_CONTENT_TYPE);
+           multipart.addBodyPart(mbp);
+       }
+
+
 
         message.saveChanges();
         T entity = function.apply(message);
@@ -118,6 +177,21 @@ public class MailUtil extends AbaseBusiness {
          * 内容
          */
         private String content;
+
+        /**
+         * 附件 key = url,value=fileName
+         */
+        private Map<String,String> fileUrls;
+
+        /**
+         * 抄送
+         */
+        private List<String> cc;
+
+        /**
+         * 密送
+         */
+        private List<String> bcc;
 
         public Builder setName(String name) {
             this.name = name;
@@ -195,6 +269,36 @@ public class MailUtil extends AbaseBusiness {
 
         public Builder setProperties(Properties properties) {
             this.properties = properties;
+            return this;
+        }
+
+        /**
+         * 附件 key = url,value=fileName
+         * @param fileUrls
+         * @return
+         */
+        public Builder setFileUrls(Map<String,String> fileUrls) {
+            this.fileUrls = fileUrls;
+            return this;
+        }
+
+        /**
+         * 抄送
+         * @param cc
+         * @return
+         */
+        public Builder setCc(List<String> cc) {
+            this.cc = cc;
+            return this;
+        }
+
+        /**
+         * 密送
+         * @param bcc
+         * @return
+         */
+        public Builder setBcc(List<String> bcc) {
+            this.bcc = bcc;
             return this;
         }
     }

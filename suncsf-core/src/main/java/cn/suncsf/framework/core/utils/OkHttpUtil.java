@@ -65,7 +65,7 @@ public class OkHttpUtil {
         try {
             Response response = getResponse(url,params);
             if(response != null){
-                return response.body().toString();
+                return response.body().string();
             }
         }catch (IOException e){
             e.printStackTrace();
@@ -121,7 +121,7 @@ public class OkHttpUtil {
     public <T> String post(String url, T t) {
         try {
             Response response = postResponse(url,t);
-            return response.body().toString();
+            return response.body().string();
         } catch (IOException e) {
             e.printStackTrace();
         }
