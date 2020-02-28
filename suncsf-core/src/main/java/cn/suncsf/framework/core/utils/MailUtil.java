@@ -107,7 +107,6 @@ public class MailUtil extends AbaseBusiness {
                         multipart.addBodyPart(mbp);
                     }
                 }
-                message.setContent(multipart);
             }catch (Exception e){
                 logger.error(e.getMessage());
                 new EMainException("邮件附件解析错误");
@@ -120,8 +119,10 @@ public class MailUtil extends AbaseBusiness {
            multipart.addBodyPart(mbp);
        }
 
-
-
+       if(multipart.getCount() == 0){
+           return getResult(0);
+       }
+        message.setContent(multipart);
         message.saveChanges();
         T entity = function.apply(message);
         Transport transport = session.getTransport();

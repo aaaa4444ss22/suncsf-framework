@@ -16,7 +16,6 @@
     <name>suncsf-core</name>
     <!-- FIXME change it to the project's website -->
     <url>http://www.example.com</url>
-
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
@@ -37,10 +36,10 @@
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
         </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-beans</artifactId>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>commons-beanutils</groupId>-->
+<!--            <artifactId>commons-beanutils</artifactId>-->
+<!--        </dependency>-->
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-core</artifactId>
@@ -57,18 +56,11 @@
             <artifactId>okhttp</artifactId>
             <version>3.14.1</version>
         </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-jdbc</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.aspectj</groupId>
-            <artifactId>aspectjweaver</artifactId>
-            <version>1.9.2</version>
-        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.springframework/spring-context -->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
+            <version>5.0.13.RELEASE</version>
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/com.sun.mail/javax.mail -->
@@ -81,8 +73,5 @@
 
     <build>
         <finalName>${artifactId}-${parent.version}</finalName>
-        <plugins>
-
-        </plugins>
     </build>
 </project>
