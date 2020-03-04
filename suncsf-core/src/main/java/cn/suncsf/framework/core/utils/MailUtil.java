@@ -118,9 +118,10 @@ public class MailUtil extends AbaseBusiness {
                    ,StringUtils.isNotBlank(builder.contentType)?builder.contentType:HTML_CONTENT_TYPE);
            multipart.addBodyPart(mbp);
        }
-        if(multipart.getCount() == 0){
-            return getResult(0);
-        }
+
+       if(multipart.getCount() == 0){
+           return getResult(0);
+       }
         message.setContent(multipart);
         message.saveChanges();
         T entity = function.apply(message);

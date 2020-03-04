@@ -5,11 +5,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanWrapper;
 import org.springframework.beans.BeanWrapperImpl;
+//import org.springframework.beans.BeanWrapper;
+//import org.springframework.beans.BeanWrapperImpl;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.lang.reflect.Array;
+import java.lang.reflect.Field;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -153,6 +156,14 @@ public class PropertiesUtil {
                 BeanWrapper beanWrapper = new BeanWrapperImpl(t);
                 Map<String, String> values = item.getValue();
                 beanWrapper.setPropertyValues(values);
+//                Field[] fields = t.getClass().getFields();
+//                for (int j = 0; j < fields.length; j++) {
+//                    Field field = fields[j];
+//                    Map<String,String> values = item.getValue();
+//                    if(values.containsKey(field.getName())){
+//                        field.set(field.getName(),values.get(field.getName()));
+//                    }
+//                }
                 array[i] = t;
                 i++;
             } catch (InstantiationException e) {

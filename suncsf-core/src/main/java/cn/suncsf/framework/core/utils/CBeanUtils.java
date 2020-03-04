@@ -1,11 +1,21 @@
 package cn.suncsf.framework.core.utils;
 
 
+import cn.suncsf.framework.core.entity.EntityKeyValue;
+import cn.suncsf.framework.core.utils.extr.KeyValueGen;
+import com.sun.istack.internal.Nullable;
+import org.apache.commons.lang3.ClassUtils;
+import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.beans.BeanUtils;
 
+import java.beans.PropertyDescriptor;
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
-import java.util.ArrayList;
-import java.util.List;
+import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * @author sunchao
@@ -24,6 +34,7 @@ public class CBeanUtils {
         for (Object item : sources) {
             try {
                 Object v = vClass.newInstance();
+//                BeanUtils.copyProperties();
                 BeanUtils.copyProperties(item, v);
                 list.add((T) v);
 
@@ -44,11 +55,14 @@ public class CBeanUtils {
             Object v = vClass.newInstance();
             BeanUtils.copyProperties(source, v);
             return (T) v;
-        }catch (InstantiationException ex) {
+        } catch (InstantiationException ex) {
             ex.printStackTrace();
         } catch (IllegalAccessException ex) {
+            ex.printStackTrace();
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
         return null;
     }
+
 }

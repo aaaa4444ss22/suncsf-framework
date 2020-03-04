@@ -4,19 +4,15 @@ import static org.junit.Assert.assertTrue;
 
 import cn.suncsf.framework.core.common.KeyValueStr;
 import cn.suncsf.framework.core.entity.EntityBase;
+import cn.suncsf.framework.core.entity.EntityDatabase;
 import cn.suncsf.framework.core.entity.EntityKeyValue;
 import cn.suncsf.framework.core.entity.ResultObject;
-import cn.suncsf.framework.core.utils.DateUtil;
-import cn.suncsf.framework.core.utils.JsonUtil;
-import cn.suncsf.framework.core.utils.OkHttpUtil;
-import cn.suncsf.framework.core.utils.PropertiesUtil;
+import cn.suncsf.framework.core.utils.*;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
-import org.springframework.beans.BeanWrapper;
-import org.springframework.beans.BeanWrapperImpl;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
@@ -124,5 +120,18 @@ public class AppTest {
         LocalDateTime dateTime = DateUtil.dateToLocalDateTime(new Date());
         Assert.assertNotNull(dateTime);
     }
+
+
+    @Test
+    public  void t4(){
+        HomePerson person = new HomePerson();
+        person.setName("ASDAD");
+        person.setContent("asdasdsad");
+        HomePerson homePerson = CBeanUtils.copyProperties(person,HomePerson.class);
+        System.out.println(homePerson.toJson());
+    }
+
+
+
 
 }
