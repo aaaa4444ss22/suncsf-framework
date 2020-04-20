@@ -124,11 +124,11 @@ public class AppTest {
 
     @Test
     public  void t4(){
-        HomePerson person = new HomePerson();
-        person.setName("ASDAD");
-        person.setContent("asdasdsad");
-        HomePerson homePerson = CBeanUtils.copyProperties(person,HomePerson.class);
-        System.out.println(homePerson.toJson());
+//        HomePerson person = new HomePerson();
+//        person.setName("ASDAD");
+//        person.setContent("asdasdsad");
+//        HomePerson homePerson = CBeanUtils.copyProperties(person,HomePerson.class);
+//        System.out.println(homePerson.toJson());
     }
 
 
