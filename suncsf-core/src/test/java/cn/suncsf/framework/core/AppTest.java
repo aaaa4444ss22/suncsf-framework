@@ -39,23 +39,31 @@ public class AppTest {
 
 
     public static void main(String[] args) {
-        Properties properties = PropertiesUtil.load("test.properties", AppTest.class);
-        final String key = "list.states";
-        final Class<?> cls = List.class;
-        final Class<?> ccls = KeyValueStr.class;
-        Map<String, Map<String, String>> list = PropertiesUtil.getListPropertyValue(properties, key);
-//        List<Object> lista = new ArrayList<>();
-        List<KeyValueStr> list1 = PropertiesUtil.builder(list,KeyValueStr.class);
+//        Properties properties = PropertiesUtil.load("test.properties", AppTest.class);
+//        final String key = "list.states";
+//        final Class<?> cls = List.class;
+//        final Class<?> ccls = KeyValueStr.class;
+//        Map<String, Map<String, String>> list = PropertiesUtil.getListPropertyValue(properties, key);
+////        List<Object> lista = new ArrayList<>();
+//        List<KeyValueStr> list1 = PropertiesUtil.builder(list,KeyValueStr.class);
+//
+//        try {
+//            System.out.println(JsonUtil.getObjectMapper().writeValueAsString(list1));
+//        } catch (JsonProcessingException e) {
+//            e.printStackTrace();
+//        }
+//
+//        String v = PropertiesUtil.getPropertyValue(properties,"list.statesa[0].sKey");
+//        System.out.println(v);
+        Date nowDate = DateUtil.localDateToDate(DateUtil.getWeekFirstDay());
 
-        try {
-            System.out.println(JsonUtil.getObjectMapper().writeValueAsString(list1));
-        } catch (JsonProcessingException e) {
-            e.printStackTrace();
-        }
+        Date lateDate = DateUtil.localDateToDate(DateUtil.getWeekEndDay());
 
-        String v = PropertiesUtil.getPropertyValue(properties,"list.statesa[0].sKey");
-        System.out.println(v);
-
+        float timeNumber = DateUtil.calculateBothDateResult(lateDate,nowDate, DateUtil.DateTypeEnum.Hour);
+        int[] times = {0,10,8};
+        Arrays.sort(times);
+        OptionalInt maxInt = Arrays.stream(times).max();
+        System.out.println(timeNumber);
     }
 
 

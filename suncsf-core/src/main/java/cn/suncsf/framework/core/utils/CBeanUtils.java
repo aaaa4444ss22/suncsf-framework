@@ -3,7 +3,7 @@ package cn.suncsf.framework.core.utils;
 
 import cn.suncsf.framework.core.entity.EntityKeyValue;
 import cn.suncsf.framework.core.utils.extr.KeyValueGen;
-import com.sun.istack.internal.Nullable;
+//import com.sun.istack.internal.Nullable;
 import org.apache.commons.lang3.ClassUtils;
 import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.beans.BeanUtils;

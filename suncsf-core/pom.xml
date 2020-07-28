@@ -40,10 +40,14 @@
 <!--            <groupId>commons-beanutils</groupId>-->
 <!--            <artifactId>commons-beanutils</artifactId>-->
 <!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>org.apache.logging.log4j</groupId>-->
+<!--            <artifactId>log4j-core</artifactId>-->
+<!--            <version>2.11.2</version>-->
+<!--        </dependency>-->
         <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-core</artifactId>
-            <version>2.11.2</version>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
         </dependency>
         <!-- https://mvnrepository.com/artifact/com.rabbitmq/amqp-client -->
         <dependency>
