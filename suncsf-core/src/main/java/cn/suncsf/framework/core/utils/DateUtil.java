@@ -48,6 +48,19 @@ public class DateUtil {
         Instant instant = localDate.atStartOfDay(zone).toInstant();
         return Date.from(instant);
     }
+    /**
+     * LocalDateTime 转 Date
+     *
+     * @param localDateTime
+     * @return
+     */
+    public static Date localDateTimeToDate(LocalDateTime localDateTime) {
+//        LocalDate createTime = LocalDate.parse(node.get("CreateTime").asText());
+        ZoneId zone = ZoneId.systemDefault();
+        Instant instant = localDateTime.atZone(zone).toInstant();
+        return Date.from(instant);
+    }
+
 
     public static LocalDateTime dateToLocalDateTime(Date date) {
         long time = date.getTime();
@@ -56,6 +69,12 @@ public class DateUtil {
         return LocalDateTime.ofInstant(instant, zone);
     }
 
+    public static LocalDate dateToLocalDate(Date date) {
+        long time = date.getTime();
+        Instant instant = Instant.ofEpochMilli(time);
+        ZoneId zone = ZoneId.systemDefault();
+        return instant.atZone(zone).toLocalDate();
+    }
     /**
      * 获取当前日期
      *
