@@ -11,10 +11,12 @@ import java.util.List;
 
 public abstract class AbaseBusiness {
 
+
     private static Logger logger = LoggerFactory.getLogger(AbaseBusiness.class);
 
     /**
      * 返回结果
+     *
      * @param count
      * @param message
      * @return
@@ -26,6 +28,7 @@ public abstract class AbaseBusiness {
 
     /**
      * 返回结果
+     *
      * @param count
      * @param message
      * @return
@@ -36,7 +39,20 @@ public abstract class AbaseBusiness {
     }
 
     /**
+     * 返回携带实体
+     *
+     * @param count
+     * @param objectEntity
+     * @return
+     */
+    public EntityResult getResultObjectEntity(int count, Object objectEntity) {
+        logger.debug("getResult(int,Object);成功数：{}，提示消息：{}", count, objectEntity);
+        return new ResultObject().createResult(count, null, objectEntity);
+    }
+
+    /**
      * 返回结果
+     *
      * @param count
      * @return
      */
@@ -47,6 +63,7 @@ public abstract class AbaseBusiness {
 
     /**
      * 返回并初始化
+     *
      * @param result
      * @return
      */
@@ -58,6 +75,42 @@ public abstract class AbaseBusiness {
         return result;
     }
 
+    /**
+     * 返回并初始化
+     * @param flag
+     * @param message
+     * @param objectEntity
+     * @return
+     */
+    public EntityResult getResult(boolean flag, String message, Object objectEntity) {
+        return getResult(flag ? 1 : 0, message, objectEntity);
+    }
+    /**
+     * 返回并初始化
+     * @param flag
+     * @param message
+     * @return
+     */
+    public EntityResult getResult(boolean flag, String message) {
+        return getResult(flag ? 1 : 0, message);
+    }
+    /**
+     * 返回并初始化
+     * @param flag
+     * @return
+     */
+    public EntityResult getResult(boolean flag) {
+        return getResult(flag ? 1 : 0);
+    }
 
+    /**
+     * 返回携带实体
+     * @param flag
+     * @param objectEntity
+     * @return
+     */
+    public EntityResult getResultObjectEntity(boolean flag, Object objectEntity) {
+        return getResultObjectEntity(flag?1:0,objectEntity);
+    }
 
 }
